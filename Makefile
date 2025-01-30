@@ -1,12 +1,13 @@
 NAME = pipex
 
-BONUS = pipex
+BONUS = pipex_bonus
 
 LIBFT = libft/
 
 LIBFT_A =	$(LIBFT)libft.a
 
-SRC = 
+SRC = pipex.c \
+		src/free.c
 
 SRC_BONUS = 
 

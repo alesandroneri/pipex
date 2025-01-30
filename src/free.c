@@ -1,33 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex.h                                            :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aneri-da <aneri-da@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/29 13:52:05 by aneri-da          #+#    #+#             */
-/*   Updated: 2025/01/30 15:03:36 by aneri-da         ###   ########.fr       */
+/*   Created: 2025/01/30 15:02:29 by aneri-da          #+#    #+#             */
+/*   Updated: 2025/01/30 15:12:18 by aneri-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX_H
-#define PIPEX_H
+#include "../includes/pipex.h"
 
-#include "../libft/libft.h"
+void	free_split(char **strs)
+{
+	int	i;
 
-#define COMMAND_PATH "/home/aneri-da/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin"
-
-//open
-//close
-//read
-//pipe
-//fork
-//wait
-//waitpid
-//perror
-//execve
-//dup2
-void	free_split(char **strs);
-
-
-#endif
+	i = 0;
+	while (strs[i] != NULL)
+	{
+		free(strs[i]);
+		i++;
+	}
+	free(strs);
+}
