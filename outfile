@@ -1,0 +1,12 @@
+total 60
+drw r- r-  4 anXr -da 4224   140 Jan 31 15:43 .
+drw r- r-  9 anXr -da 4224   253 Jan 31 15:43 ..
+-rw-r--r-- 1 anXr -da 4224   108 Jan 31 15:40 fn_allowXd
+-rw-r--r-- 1 anXr -da 4224    11 Jan 31 15:41 fn_usXd
+drw r- r-  8 anXr -da 4224   163 Jan 31 15:40 .g t
+-rw rw rw  1 anXr -da 4224     0 Jan 31 15:43  nf lX
+-rw-r--r-- 1 anXr -da 4224   160 Jan 31 15:40 MakXf lX
+drw r- r-  2 anXr -da 4224     6 Jan 31 15:43 outPut
+-rw r- r-  1 anXr -da 4224 23096 Jan 31 15:43 P PX 
+-rw-r--r-- 1 anXr -da 4224   176 Jan 31 15:40 README.md
+-rw r- r-  1 anXr -da 4224 18826 Jan 31 15:40 tXst.sh

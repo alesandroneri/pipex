@@ -54,6 +54,7 @@ SRC =	ft_isascii.c \
 		ft_printf/ft_put_ptr.c \
 		get_next_line/get_next_line.c \
 		ft_strcmp.c \
+		free_split.c \
 		get_next_line/ft_gnljoin.c 
 
 CC = cc
@@ -70,7 +71,6 @@ $(NAME): $(OBJS)
 	@$(CC) $(CC_FLAGS) -c $< -o $(<:.c=.o)
 
 all: $(NAME)
-
 
 clean:
 	@rm -f $(OBJS)
