@@ -55,6 +55,7 @@ SRC =	ft_isascii.c \
 		get_next_line/get_next_line.c \
 		ft_strcmp.c \
 		free_split.c \
+		ft_strndup.c \
 		get_next_line/ft_gnljoin.c 
 
 CC = cc

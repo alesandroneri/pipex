@@ -6,7 +6,7 @@
 /*   By: aneri-da <aneri-da@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 10:08:52 by aneri-da          #+#    #+#             */
-/*   Updated: 2025/01/31 15:33:04 by aneri-da         ###   ########.fr       */
+/*   Updated: 2025/01/31 23:41:56 by aneri-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct s_list
 	struct s_list	*next;
 }					t_list;
 
+char				*ft_strndup(const char *src, size_t n);
 void				free_split(char **strs);
 int					ft_strcmp(char *s1, char *s2);
 int					ft_isalpha(int c);
