@@ -1,12 +1,12 @@
-total 60
-drw r- r-  4 anXr -da 4224   140 Jan 31 15:43 .
-drw r- r-  9 anXr -da 4224   253 Jan 31 15:43 ..
--rw-r--r-- 1 anXr -da 4224   108 Jan 31 15:40 fn_allowXd
--rw-r--r-- 1 anXr -da 4224    11 Jan 31 15:41 fn_usXd
-drw r- r-  8 anXr -da 4224   163 Jan 31 15:40 .g t
--rw rw rw  1 anXr -da 4224     0 Jan 31 15:43  nf lX
--rw-r--r-- 1 anXr -da 4224   160 Jan 31 15:40 MakXf lX
-drw r- r-  2 anXr -da 4224     6 Jan 31 15:43 outPut
--rw r- r-  1 anXr -da 4224 23096 Jan 31 15:43 P PX 
--rw-r--r-- 1 anXr -da 4224   176 Jan 31 15:40 README.md
--rw r- r-  1 anXr -da 4224 18826 Jan 31 15:40 tXst.sh
+TOTAL 60
+DRWXR-XR-X 4 ANERI-DA 4224   140 JAN 31 15:43 .
+DRWXR-XR-X 9 ANERI-DA 4224   253 JAN 31 15:43 ..
+-RW-R--R-- 1 ANERI-DA 4224   108 JAN 31 15:40 FN_ALLOWED
+-RW-R--R-- 1 ANERI-DA 4224    11 JAN 31 15:41 FN_USED
+DRWXR-XR-X 8 ANERI-DA 4224   163 JAN 31 15:40 .GIT
+-RWXRWXRWX 1 ANERI-DA 4224     0 JAN 31 15:43 INFILE
+-RW-R--R-- 1 ANERI-DA 4224   160 JAN 31 15:40 MAKEFILE
+DRWXR-XR-X 2 ANERI-DA 4224     6 JAN 31 15:43 OUTPUT
+-RWXR-XR-X 1 ANERI-DA 4224 23096 JAN 31 15:43 PIPEX
+-RW-R--R-- 1 ANERI-DA 4224   176 JAN 31 15:40 README.MD
+-RWXR-XR-X 1 ANERI-DA 4224 18826 JAN 31 15:40 TEST.SH

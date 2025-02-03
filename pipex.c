@@ -6,98 +6,11 @@
 /*   By: aneri-da <aneri-da@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:50:42 by aneri-da          #+#    #+#             */
-/*   Updated: 2025/02/01 00:07:43 by aneri-da         ###   ########.fr       */
+/*   Updated: 2025/02/03 18:59:56 by aneri-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/pipex.h"
-
-int	count_args(const char *input)
-{
-	int		i;
-	int		count;
-	char	quote_char;
-
-	i = 0;
-	count = 0;
-	quote_char = 0;
-	while (input[i])
-	{
-		while (input[i++] == ' ')
-		if (!input[i])
-			break ;
-		count++;
-		if (input[i] == '\'' || input[i] == '\"')
-		{
-			quote_char = input[i++];
-			while (input[i] && input[i] != quote_char)
-				i++;
-			if (input[i])
-				i++;
-		}
-		else
-			while (input[i] && input[i] != ' ' && input[i] != '\''
-				&& input[i] != '\"')
-				i++;
-	}
-	return (count);
-}
-
-char	**parse_args(char *input)
-{
-	char	**args;
-	int		in_quotes;
-	char	quote_char;
-	int		k;
-	int		i;
-	int		j;
-	int		start;
-	int		arg_count;
-	char	*trimmed;
-
-	arg_count = count_args(input);
-	args = malloc(sizeof(char *) * (arg_count + 1));
-	if (!args)
-		return (NULL);
-	i = 0;
-	j = 0;
-	start = 0;
-	in_quotes = 0;
-	quote_char = 0;
-	while (input[i])
-	{
-		if ((input[i] == '\'' || input[i] == '\"') && !in_quotes)
-		{
-			in_quotes = 1;
-			quote_char = input[i];
-			start = i + 1;
-		}
-		else if (input[i] == quote_char && in_quotes)
-		{
-			in_quotes = 0;
-			args[j++] = ft_strndup(&input[start], i - start);
-			start = i + 1;
-		}
-		else if (input[i] == ' ' && !in_quotes)
-		{
-			if (i > start)
-				args[j++] = ft_strndup(&input[start], i - start);
-			start = i + 1;
-		}
-		i++;
-	}
-	if (i > start)
-		args[j++] = ft_strndup(&input[start], i - start);
-	args[j] = NULL;
-	k = -1;
-	while (++k < j)
-	{
-		trimmed = ft_strtrim(args[k], "\"'");
-		free(args[k]);
-		args[k] = trimmed;
-	}
-	return (args);
-}
 
 char	*get_path(char *cmd, char **ep)
 {
@@ -130,10 +43,15 @@ char	*get_path(char *cmd, char **ep)
 void	execute(char *av, char **ep)
 {
 	char	**cmd;
+	char	**args;
 	char	*path;
+	int		arg_count;
+	t_parse	st;
 
-	// cmd = ft_split(av, ' ');
-	cmd = parse_args(av);
+	init_variables(&st);
+	arg_count = count_args(av);
+	args = (char **)malloc(sizeof(char *) * (arg_count + 1));
+	cmd = parse_args(args, av, st);
 	if (!cmd)
 		exit(1);
 	path = get_path(cmd[0], ep);
@@ -211,5 +129,5 @@ int	main(int ac, char **av, char **ep)
 		return (0);
 	}
 	ft_putendl_fd("Error: invalid number of arguments.", 2);
-	return (1);
+	return (-1);
 }

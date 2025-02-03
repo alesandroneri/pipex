@@ -6,7 +6,8 @@ LIBFT = libft/
 
 LIBFT_A =	$(LIBFT)libft.a
 
-SRC = pipex.c 
+SRC = pipex.c \
+		src/parse.c 
 
 SRC_BONUS = 
 
