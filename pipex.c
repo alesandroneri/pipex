@@ -6,7 +6,7 @@
 /*   By: aneri-da <aneri-da@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:50:42 by aneri-da          #+#    #+#             */
-/*   Updated: 2025/02/03 18:59:56 by aneri-da         ###   ########.fr       */
+/*   Updated: 2025/02/04 14:52:30 by aneri-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,10 @@ void	execute(char *av, char **ep)
 		perror("get_path");
 		exit(127);
 	}
-	if (execv(path, cmd) < 0)
+	if (execve(path, cmd, NULL) < 0)
 	{
 		free_split(cmd);
-		perror("execv");
+		perror("execve");
 		exit(127);
 	}
 }
@@ -125,6 +125,7 @@ int	main(int ac, char **av, char **ep)
 		if (pid == 0)
 			child_process(av, fd, ep);
 		close(fd[1]);
+		waitpid(pid, NULL, 0);
 		parent_process(av, fd, ep);
 		return (0);
 	}

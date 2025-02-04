@@ -1,6 +1,6 @@
 NAME = pipex
 
-BONUS = pipex_bonus
+NAME_BONUS = pipex_bonus
 
 LIBFT = libft/
 
@@ -9,7 +9,9 @@ LIBFT_A =	$(LIBFT)libft.a
 SRC = pipex.c \
 		src/parse.c 
 
-SRC_BONUS = 
+SRC_BONUS = pipex_bonus.c \
+			src_bonus/open_file.c \
+			src_bonus/parse_bonus.c
 
 CC = cc
 
@@ -31,10 +33,17 @@ $(NAME): $(OBJ)
 	@echo "✅"
 	@echo "Files were generated successfully!✅✅✅"
 
-bonus: $(LIBFT_A) $(BONUS)
+bonus: $(LIBFT_A) $(NAME_BONUS)
 
-$(BONUS): $(BONUS_OBJ)
-	@$(CC) $(CC_FLAGS) $(BONUS_OB) $(LIBFT_A) -o $(BONUS)
+$(NAME_BONUS): $(BONUS_OBJ)
+	@$(CC) $(CC_FLAGS) $(BONUS_OBJ) $(LIBFT_A) -o $(NAME_BONUS)
+	@echo -n "Loading"
+	@for i in {1..5}; do \
+		echo -n "."; \
+		sleep 0.5; \
+	done
+	@echo "✅"
+	@echo "Files were generated successfully!✅✅✅"
 
 .c.o:
 	@$(CC) $(CC_FLAGS) -c $< -o $(<:.c=.o)
@@ -54,7 +63,7 @@ clean:
 	@echo "Files were deleted correctly!✅✅✅"
 
 fclean: clean
-	@rm -rf $(NAME) $(CHECK)
+	@rm -rf $(NAME) $(NAME_BONUS)
 	@make fclean -C $(LIBFT) -s
 
 re: fclean all

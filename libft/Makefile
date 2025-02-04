@@ -64,7 +64,6 @@ CC_FLAGS = -g -Wall -Wextra -Werror
 
 OBJS = $(SRC:.c=.o)
 
-
 $(NAME): $(OBJS)
 	@ar rc $(NAME) $(OBJS)
 

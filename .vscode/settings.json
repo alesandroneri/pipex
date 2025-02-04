@@ -3,6 +3,7 @@
         "pipex.h": "c",
         "fcntl.h": "c",
         "wait.h": "c",
-        "libft.h": "c"
+        "libft.h": "c",
+        "pipex_bonus.h": "c"
     }
 }
