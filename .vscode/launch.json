@@ -8,8 +8,8 @@
       "name": "Debug C/C++ Program",
       "type": "cppdbg",
       "request": "launch",
-      "program": "${workspaceFolder}/pipex",  // Substitua pelo caminho do seu programa compilado
-      "args": ["infile", "cat", "tr [a-z] [A-Z]", "outfile"],
+      "program": "${workspaceFolder}/pipex_bonus",  // Substitua pelo caminho do seu programa compilado
+      "args": ["here_doc", "EOF", "cat", "wc -l", "output_file"],
       "stopAtEntry": false,
       "cwd": "${workspaceFolder}",
       "environment": [],
