@@ -6,7 +6,7 @@
 /*   By: aneri-da <aneri-da@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/29 13:52:05 by aneri-da          #+#    #+#             */
-/*   Updated: 2025/02/04 17:06:57 by aneri-da         ###   ########.fr       */
+/*   Updated: 2025/02/06 19:49:16 by aneri-da         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,13 @@ typedef struct s_parse
 	int		i;
 	int		j;
 	int		start;
-} t_parse ;
+}			t_parse;
 
-void init_variables(t_parse *st);
-int	count_args(const char *input);
-char	**parse_args(char **args, char *input, t_parse st);
-int open_fd(char *file, int id_input_output);
+void		heredoc(int ac, char **av);
+void		init_variables(t_parse *st);
+int			count_args(const char *input);
+char		**parse_args(char **args, char *input, t_parse st);
+void		open_heredoc_fd(int ac, char **av, int fd_input, int fd_output);
+void		open_fd(int ac, char **av, int fd_input, int fd_output);
 
 #endif

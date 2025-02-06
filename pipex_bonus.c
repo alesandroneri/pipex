@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipex_bonus.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aneri-da <aneri-da@student.42.rio>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/06 19:32:08 by aneri-da          #+#    #+#             */
+/*   Updated: 2025/02/06 19:41:29 by aneri-da         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "includes/pipex_bonus.h"
 
 char	*get_path(char *cmd, char **ep)
@@ -7,8 +19,6 @@ char	*get_path(char *cmd, char **ep)
 	char	*partial_path;
 	int		i;
 
-	if (ft_strchr(cmd, '/'))
-		return (ft_strdup(cmd));
 	i = -1;
 	while (ep[++i] != NULL)
 		if (ft_strncmp(ep[i], "PATH=", 5) == 0)
@@ -58,63 +68,15 @@ void	execute(char *av, char **ep)
 		exit(127);
 	}
 }
-void heredoc_message(char *str)
-{
-	
-}
 
-void	put_heredoc(char **av, int *pid_fd)
+void	part_process(int *pid_fd, int last)
 {
-	char	*line;
-	char	*delimeter;
-	int		delimeter_length;
-	int		line_length;
-	int		temp_file;
-
-	close(pid_fd[0]);
-	temp_file = open("heredoc", O_CREAT | O_WRONLY | O_TRUNC, 0644);
-	delimeter = av[2];
-	delimeter_length = ft_strlen(av[2]);
-	while (1)
+	if (!last)
 	{
-		ft_printf("heredoc> ");
-		line = get_next_line(0);
-		line_length = ft_strlen(line);
-		write(temp_file, line, line_length);
-		if (!line)
-			break ;
-		if (ft_strncmp(line, delimeter, delimeter_length) == 0)
-		{
-			free(line);
-			exit(0);
-		}
-		ft_putstr_fd(line, pid_fd[1]);
-		free(line);
-	}
-	unlink("heredoc");
-	close(pid_fd[1]);
-	exit(0);
-}
-
-void	heredoc(char **av)
-{
-	int		pid_fd[2];
-	pid_t	pid;
-
-	if (pipe(pid_fd) < 0)
-		exit(0);
-	pid = fork();
-	if (pid < 0)
-		exit(0);
-	if (!pid)
-		put_heredoc(av, pid_fd);
-	else
-	{
-		close(pid_fd[1]);
-		dup2(pid_fd[0], STDIN_FILENO);
 		close(pid_fd[0]);
+		dup2(pid_fd[1], STDOUT_FILENO);
+		close(pid_fd[1]);
 	}
-	wait(NULL);
 }
 
 void	process(char *cmd, char **ep, int last, int fd_output)
@@ -129,13 +91,8 @@ void	process(char *cmd, char **ep, int last, int fd_output)
 		exit(0);
 	if (!pid)
 	{
-		if (!last)
-		{
-			close(pid_fd[0]);
-			dup2(pid_fd[1], STDOUT_FILENO);
-			close(pid_fd[1]);
-		}
-		else
+		part_process(pid_fd, last);
+		if (last)
 		{
 			dup2(fd_output, STDOUT_FILENO);
 			close(fd_output);
@@ -154,28 +111,25 @@ void	process(char *cmd, char **ep, int last, int fd_output)
 int	main(int ac, char **av, char **ep)
 {
 	int	i;
-	int	last;
 	int	fd_input;
 	int	fd_output;
 
-	if (ac < 5)
-		exit(0);
-	if (ft_strcmp(av[1], "here_doc") == 0)
+	if (ac > 4 && ft_strcmp(av[1], "here_doc") == 0)
 	{
 		i = 2;
-		fd_output = open(av[ac - 1], O_WRONLY | O_CREAT | O_APPEND, 0644);
-		heredoc(av);
+		heredoc((ac - 5), av);
 		fd_input = open("heredoc", O_RDONLY);
+		fd_output = open(av[ac - 1], O_WRONLY | O_CREAT | O_APPEND, 0644);
 	}
-	i = 1;
-	fd_input = open(av[1], O_RDONLY);
-	fd_output = open(av[ac - 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	dup2(fd_input, STDIN_FILENO);
-	close(fd_input);
-	while (++i <= (ac - 2))
+	if (ac > 4 && ft_strcmp(av[1], "here_doc") != 0)
 	{
-		last = (i == ac - 2);
-		process(av[i], ep, last, fd_output);
+		i = 1;
+		fd_input = open(av[1], O_RDONLY);
+		fd_output = open(av[ac - 1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		dup2(fd_input, STDIN_FILENO);
+		close(fd_input);
 	}
+	while (++i <= (ac - 2))
+		process(av[i], ep, (i == ac - 2), fd_output);
 	return (0);
 }

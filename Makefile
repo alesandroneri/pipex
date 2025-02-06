@@ -10,7 +10,7 @@ SRC = pipex.c \
 		src/parse.c 
 
 SRC_BONUS = pipex_bonus.c \
-			src_bonus/open_file.c \
+			src_bonus/heredoc.c \
 			src_bonus/parse_bonus.c
 
 CC = cc
